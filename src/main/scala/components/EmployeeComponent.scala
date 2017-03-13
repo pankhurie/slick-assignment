@@ -9,19 +9,26 @@ object EmployeeComponent extends EmployeeTable{
 
   this:DBProvider =>
   import driver.api._
+
   def create = db.run(employeeTableQuery.schema.create)
 
   def insert(employee: Employee) = db.run(employeeTableQuery += employee)
 
-  def delete(exp: Double) = {
-    val query = employeeTableQuery.filter(x => x.experience < exp)
+  def delete(id: Int) = {
+    val query = employeeTableQuery.filter(x => x.id === id)
     val action = query.delete //delete records which are les than 4
     db.run(action)
   }
 
-  def updateName(id:Int, name:String) : Future[Int] = {
+  def updateName(id:Int, name:String) = {
     val query = employeeTableQuery.filter(x => x.id === id)
       .map(_.name).update(name)
+    db.run(query)
+  }
+
+  def updateExperience(id:Int, experience:Double) = {
+    val query = employeeTableQuery.filter(x => x.id === id)
+      .map(_.experience).update(experience)
     db.run(query)
   }
 
@@ -29,6 +36,15 @@ object EmployeeComponent extends EmployeeTable{
     val query = employeeTableQuery.insertOrUpdate(employee)
     db.run(query)
   }
-    //insert with tuple
-  //  def insertMultiple(list: List[Employee]) = db.run(employeeTableQuery.)
+
+  def getFreshers() = {
+    val query = employeeTableQuery.filter(x => x.experience < 1D).to[List].result
+    db.run(query)
+  }
+
+  def getAll()= {
+    val query = employeeTableQuery.to[List].result
+    db.run(query)
+  }
+
 }

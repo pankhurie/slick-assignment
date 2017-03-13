@@ -1,6 +1,6 @@
 package mappings
 
-trait EmployeeTable extends PostGresDBProvider{
+trait EmployeeTable extends MySqlDBProvider{
   this:DBProvider =>
   import driver.api._
 

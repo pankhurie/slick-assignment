@@ -1,7 +1,7 @@
 package mappings
 
 
-trait ProjectTable extends EmployeeTable with PostGresDBProvider{
+trait ProjectTable extends EmployeeTable{
   this:DBProvider =>
   import driver.api._
   class ProjectTable(tag: Tag) extends Table[Project](tag, "project") {
