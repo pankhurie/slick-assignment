@@ -1,10 +1,10 @@
 package components
 
-import mappings.{DBProvider, Dependent, DependentTable}
+import mappings.{MySqlDBProvider, DBProvider, Dependent, DependentTable}
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
-object DependentComponent extends DependentTable{
+trait DependentComponent extends DependentTable{
   this:DBProvider =>
   import driver.api._
 
@@ -58,3 +58,5 @@ object DependentComponent extends DependentTable{
   }
 
 }
+
+object DependentComponent extends DependentComponent with MySqlDBProvider

@@ -1,11 +1,11 @@
 package components
 
-import mappings.{DBProvider, Employee, EmployeeTable}
+import mappings.{MySqlDBProvider, DBProvider, Employee, EmployeeTable}
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
 
-object EmployeeComponent extends EmployeeTable{
+trait EmployeeComponent extends EmployeeTable{
 
   this:DBProvider =>
   import driver.api._
@@ -48,3 +48,5 @@ object EmployeeComponent extends EmployeeTable{
   }
 
 }
+
+object EmployeeComponent extends EmployeeComponent with MySqlDBProvider

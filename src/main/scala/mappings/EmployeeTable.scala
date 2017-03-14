@@ -1,6 +1,6 @@
 package mappings
 
-trait EmployeeTable extends MySqlDBProvider{
+trait EmployeeTable{
   this:DBProvider =>
   import driver.api._
 

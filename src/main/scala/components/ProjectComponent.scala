@@ -1,10 +1,10 @@
 package components
 
-import mappings.{DBProvider, Project, ProjectTable}
+import mappings.{MySqlDBProvider, DBProvider, Project, ProjectTable}
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
-object ProjectComponent extends ProjectTable{
+trait ProjectComponent extends ProjectTable{
   this:DBProvider =>
   import driver.api._
 
@@ -40,3 +40,5 @@ object ProjectComponent extends ProjectTable{
   }
 
 }
+
+object ProjectComponent extends ProjectComponent with MySqlDBProvider
