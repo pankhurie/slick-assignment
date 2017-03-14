@@ -35,6 +35,10 @@ object SlickDemo extends App{
   DependentComponent.insert(Dependent(3, "Shubhangi", "Sister", Some(9)))
   DependentComponent.insert(Dependent(4, "Shubham", "Brother", Some(15)))
 
+  EmployeeComponent.updateName(1, "Pankhurie Gupta")
+  ProjectComponent.updateName(1, "Scala", "Scala+Play")
+  DependentComponent.updateRelation(Dependent(1, "Navya", "Sister"), "Younger sister")
+
   val allEmployees = EmployeeComponent.getAll()
   val allProjects = ProjectComponent.getAll()
   val allDependents = DependentComponent.getAll()
